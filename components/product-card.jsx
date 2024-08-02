@@ -2,10 +2,10 @@ import React from 'react';
 import { View, Text, Image, StyleSheet, Dimensions } from 'react-native';
 
 const { width, height } = Dimensions.get('window');
-const itemWidth = (width - 40) / 2;
-const itemHeight = height / 3;
+const itemWidth = (width - 30) / 2; // Adjusted for margins
+const itemHeight = height * 0.45; // 85% of the window height
 
-const Producto = ({ idcCreator, id, backgroundImageUrl, precio, titulo }) => {
+const Producto = ({ idCreator, id, backgroundImageUrl, precio, titulo }) => {
     return (
         <View style={styles.producto}>
             <View style={styles.productoImg}>
@@ -18,10 +18,6 @@ const Producto = ({ idcCreator, id, backgroundImageUrl, precio, titulo }) => {
 };
 
 const styles = StyleSheet.create({
-    container: {
-      flex: 1,
-      backgroundColor: '#f1f1f1',
-    },
     producto: {
       width: itemWidth,
       height: itemHeight,
@@ -37,7 +33,7 @@ const styles = StyleSheet.create({
     imagen: {
       width: '100%',
       height: '100%',
-      resizeMode: 'cover', // Ensure image covers the space
+      resizeMode: 'cover', // Ensure image fits within the container
     },
     precio: {
       position: 'absolute',
@@ -55,8 +51,8 @@ const styles = StyleSheet.create({
       textAlign: 'center',
       fontFamily: 'Roboto',
       fontSize: 16,
-      marginVertical: 5,
-      paddingHorizontal: 5,
+      marginTop: 20,
+      paddingHorizontal: 7,
     },
 });
 
