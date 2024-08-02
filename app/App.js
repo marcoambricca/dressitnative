@@ -3,7 +3,6 @@ import { useState, useEffect } from 'react';
 import * as Font from 'expo-font';
 import Producto from '../components/product-card.jsx';
 import apiCall from '../api/api-fetch.js';
-import { AppLoading } from 'expo';
 
 export default function App() {
   const [prendas, setPrendas] = useState([]);
@@ -19,24 +18,17 @@ export default function App() {
   useEffect(() => {
     async function fetchWear() {
       const wear = await apiCall('wear');
-      console.log(wear);
+      try {
+        await fetchFonts();
+      }
+      catch (error) {
+        console.log(error);
+      }
       setPrendas(wear);
       setLoading(false);
     }
     fetchWear();
   }, []);
-
-  const [fontLoaded, setFontLoaded] = useState(false);
-
-  if (!fontLoaded) {
-    return (
-      <AppLoading
-        startAsync={fetchFonts}
-        onFinish={() => setFontLoaded(true)}
-        onError={console.warn}
-      ></AppLoading>
-    );
-  }
 
   if (loading) {
     return (
