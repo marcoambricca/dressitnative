@@ -1,10 +1,12 @@
 import React from 'react';
 import { View, Text, Image, StyleSheet } from 'react-native';
 
-export default function Producto({ backgroundImageUrl, precio, titulo }) {
+export default function Producto({ backgroundImageUrl, precio, titulo, itemWidth, itemHeight }) {
+  const imageHeight = itemHeight === 250 ? '78%' : '85%';
+  
   return (
-    <View style={styles.producto}>
-      <View style={styles.productoImg}>
+    <View style={[styles.producto, { width: itemWidth, height: itemHeight }]}>
+      <View style={[styles.productoImg, {height: imageHeight}]}>
         <Image source={{ uri: backgroundImageUrl }} style={styles.imagen} />
         <Text style={styles.precio}>${precio}</Text>
       </View>
@@ -15,23 +17,22 @@ export default function Producto({ backgroundImageUrl, precio, titulo }) {
 
 const styles = StyleSheet.create({
   producto: {
-    width: '50%',
-    height: 400,
-    margin: 5,
+    margin: 8,
     backgroundColor: '#fff',
     overflow: 'hidden',
-    borderRadius: 2,
+    borderRadius: 8,
+    elevation: 3, // Add some shadow for better visibility
   },
   productoImg: {
     width: '100%',
-    height: '80%',
     position: 'relative',
   },
   imagen: {
     width: '100%',
     height: '100%',
-    resizeMode: 'contain',
-    aspectRatio: 16 / 9,
+    resizeMode: 'cover', // Cover ensures the image fully covers the container
+    borderTopLeftRadius: 8,
+    borderTopRightRadius: 8,
   },
   precio: {
     position: 'absolute',
@@ -48,8 +49,9 @@ const styles = StyleSheet.create({
   titulo: {
     textAlign: 'center',
     fontFamily: 'roboto-regular',
-    fontSize: 16,
-    marginTop: 20,
-    paddingHorizontal: 10,
+    fontSize: 14,
+    marginTop: 8,
+    paddingHorizontal: 8,
+    color: '#333', // Darker color for better contrast
   },
 });
