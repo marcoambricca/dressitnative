@@ -65,6 +65,7 @@ const styles = StyleSheet.create({
     },
     scrollContainer: {
         padding: 8,
+        marginRight: 12
     },
     grid: {
         flexDirection: 'row',

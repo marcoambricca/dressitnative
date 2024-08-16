@@ -17,7 +17,7 @@ export default function NavBar() {
     };
 
     const handleProfileClick = () => {
-        navigation.navigate('Profile');
+        navigation.navigate('UserProfile');
     };
 
     return (
