@@ -1,9 +1,14 @@
 import React from 'react';
 import { View, Text, Image, StyleSheet } from 'react-native';
+import * as Font from 'expo-font';
 
 export default function Producto({ backgroundImageUrl, precio, titulo, itemWidth, itemHeight }) {
   const imageHeight = itemHeight === 250 ? '78%' : '85%';
   
+  const [fontsLoaded] = Font.useFonts({
+    'Roboto': require('../assets/fonts/Roboto-Regular.ttf'),
+  });
+
   return (
     <View style={[styles.producto, { width: itemWidth, height: itemHeight }]}>
       <View style={[styles.productoImg, {height: imageHeight}]}>
@@ -17,7 +22,9 @@ export default function Producto({ backgroundImageUrl, precio, titulo, itemWidth
 
 const styles = StyleSheet.create({
   producto: {
-    margin: 8,
+    marginHorizontal: 8,
+    marginVertical: 4,
+    fontFamily: 'Roboto',
     backgroundColor: '#fff',
     overflow: 'hidden',
     borderRadius: 8,
@@ -43,12 +50,10 @@ const styles = StyleSheet.create({
     fontSize: 14,
     fontWeight: 'bold',
     backgroundColor: '#EDE8D0',
-    textAlign: 'center',
-    fontFamily: 'Roboto',
+    textAlign: 'center'
   },
   titulo: {
     textAlign: 'center',
-    fontFamily: 'roboto-regular',
     fontSize: 14,
     marginTop: 8,
     paddingHorizontal: 8,

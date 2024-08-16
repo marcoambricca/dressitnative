@@ -1,0 +1,4 @@
+open ngrok
+run server in node on port 3000
+paste command to run ngrok tunnel:
+ngrok http --domain=top-perch-rationally.ngrok-free.app 3000

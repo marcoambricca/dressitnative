@@ -1,14 +1,18 @@
-import axios from "axios";
+import axios from 'axios';
+import { NGROKTUNNEL } from './config';
 
-export default async function apiCall(endpoint){
-    const url = 'http://localhost:3030/api/' + endpoint;
-    let result;
+export default async function apiCall(endpoint) {
+    const url = NGROKTUNNEL + endpoint;
+    let response = [];
+    
     try {
-        result = await axios.get(url);
-        console.log(result);
-    }
-    catch (e){
+        const result = await axios.get(url, { 'headers': { 'ngrok-skip-browser-warning': '1' } });
+        if (result.data && result.data.length > 0) {
+            response = result.data;
+        }
+    } catch (e) {
         console.log(e);
+        response = []; // Return an empty array if there's an error
     }
-    return result.data;
+    return response;
 }

@@ -2,7 +2,8 @@ import React, { useState, useEffect } from 'react';
 import { View, ScrollView, TouchableOpacity, StyleSheet, useWindowDimensions } from 'react-native';
 import Producto from '../components/product-card.jsx';
 import apiCall from '../api/api-fetch.js';
-import Navbar from '../components/header.jsx';
+import Header from '../components/header.jsx';
+import NavBar from '../components/navbar.jsx';
 
 export default function HomeScreen({ navigation }) {
     const [prendas, setPrendas] = useState([]);
@@ -16,14 +17,18 @@ export default function HomeScreen({ navigation }) {
     useEffect(() => {
         async function fetchWear() {
             const wear = await apiCall('wear');
-            setPrendas(wear);
+            if (wear != undefined){
+                setPrendas(wear);
+            }
         }
         fetchWear();
     }, []);
 
+    console.log(prendas)
+
     return (
-        <View style={styles.container}>
-            <Navbar isHome={true} />
+        <>
+            <Header />
             <ScrollView contentContainerStyle={styles.scrollContainer}>
                 <View style={styles.grid}>
                     {prendas.map((item) => (
@@ -50,7 +55,8 @@ export default function HomeScreen({ navigation }) {
                     ))}
                 </View>
             </ScrollView>
-        </View>
+            <NavBar />
+        </>
     );
 }
 
