@@ -1,5 +1,5 @@
 import React from 'react';
-import { View, Text, TouchableOpacity, StyleSheet } from 'react-native';
+import { View, Text, StyleSheet } from 'react-native';
 import * as Font from 'expo-font';
 
 export default function Header({ navigation }) {
@@ -18,16 +18,17 @@ const styles = StyleSheet.create({
   container: {
     backgroundColor: 'white',
     width: '100%',
-    height: 60, // Increased height to provide more space for the title
+    height: 70, // Increased height to provide more space for the title
     alignItems: 'center', // Center content horizontally
     justifyContent: 'center', // Center content vertically
     position: 'relative', // To allow for absolute positioning of the back button
   },
   title: {
     fontFamily: 'Montserrat-Bold',
-    fontSize: 24, // Larger font size
+    fontSize: 28, // Larger font size
     fontWeight: 'bold',
     color: 'black',
+    marginTop: 14
   },
   backButton: {
     position: 'absolute',

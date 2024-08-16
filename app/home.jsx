@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { View, ScrollView, TouchableOpacity, StyleSheet, useWindowDimensions } from 'react-native';
+import { View, ScrollView, TouchableOpacity, StyleSheet, useWindowDimensions, SafeAreaView } from 'react-native';
 import Producto from '../components/product-card.jsx';
 import apiCall from '../api/api-fetch.js';
 import Header from '../components/header.jsx';
@@ -24,10 +24,8 @@ export default function HomeScreen({ navigation }) {
         fetchWear();
     }, []);
 
-    console.log(prendas)
-
     return (
-        <>
+        <SafeAreaView style={styles.container}>
             <Header />
             <ScrollView contentContainerStyle={styles.scrollContainer}>
                 <View style={styles.grid}>
@@ -56,7 +54,7 @@ export default function HomeScreen({ navigation }) {
                 </View>
             </ScrollView>
             <NavBar />
-        </>
+        </SafeAreaView>
     );
 }
 
