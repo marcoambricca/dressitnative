@@ -1,14 +1,130 @@
-import React, { useState, useEffect } from 'react';
-import { View, Text, ScrollView, TouchableOpacity, StyleSheet, useWindowDimensions } from 'react-native';
+import React, { useState, useEffect, useCallback } from 'react';
+import { View, Text, TextInput, StyleSheet, ActivityIndicator, ScrollView } from 'react-native';
+import ProductList from '../components/product-list.jsx';
 import Header from '../components/header.jsx';
 import NavBar from '../components/navbar.jsx';
 
-export default function SearchScreen({ navigation }){
-    return(
-        <View>
+const Search = ({ navigation }) => {
+    const [busqueda, setBusqueda] = useState({ prendas: [], marcas: [] });
+    const [offset, setOffset] = useState(0);
+    const [loading, setLoading] = useState(false);
+    const [query, setQuery] = useState('');
+
+    const fetchResults = useCallback(async () => {
+        if (!query) return;
+        
+        setLoading(true);
+        try {
+            const response = await fetch(`http://localhost:3000/api/wear/search/${query}/${offset}/9`);
+            const data = await response.json();
+            
+            if (data && data.prendas && data.marcas) {
+                setBusqueda(prev => ({
+                    prendas: offset === 0 ? data.prendas : [...prev.prendas, ...data.prendas],
+                    marcas: data.marcas
+                }));
+                setOffset(prev => prev + 6);
+            }
+        } catch (error) {
+            console.error('Error en la búsqueda:', error);
+        } finally {
+            setLoading(false);
+        }
+    }, [query, offset]);
+
+    useEffect(() => {
+        fetchResults();
+    }, [fetchResults]);
+
+    const handleChange = (text) => {
+        setQuery(text);
+        if (text === '') {
+            // Clear the search results and reset offset when input is empty
+            setBusqueda({ prendas: [], marcas: [] });
+            setOffset(0); // Optionally reset offset
+        } else {
+            setOffset(0); // Reset offset for new search query
+            fetchResults(); // Fetch results based on new query
+        }
+    };
+    
+    return (
+        <ScrollView style={styles.container}>
             <Header />
-            <Text>Search</Text>
+            <View style={styles.searchBar}>
+                <TextInput
+                    style={styles.input}
+                    placeholder='Buscar'
+                    onChangeText={handleChange}
+                    value={query}
+                />
+                <Text style={styles.cancelText}>Cancelar</Text>
+            </View>
+
+            <View style={styles.marcas}>
+                <Text style={styles.sectionTitle}>Marcas</Text>
+                {/* Displaying marcas if needed */}
+            </View>
+
+            <View style={styles.prendas}>
+                <Text style={styles.sectionTitle}>Prendas</Text>
+                <ProductList
+                    navigation={navigation}
+                    array={busqueda.prendas}
+                />
+            </View>
+
+            {loading && (
+                <View style={styles.loading}>
+                    <ActivityIndicator size="large" color="#0000ff" />
+                </View>
+            )}
             <NavBar />
-        </View>
-    )
-}
+        </ScrollView>
+    );
+};
+
+const styles = StyleSheet.create({
+    container: {
+        flex: 1
+    },
+    searchBar: {
+        flexDirection: 'row',
+        alignItems: 'center',
+        marginBottom: 16,
+        paddingHorizontal: 12
+    },
+    input: {
+        flex: 1,
+        paddingVertical: 12,
+        paddingHorizontal: 15,
+        fontWeight: '700',
+        color: 'black',
+        backgroundColor: 'rgba(228, 228, 228, 0.5)',
+        borderRadius: 50,
+    },
+    cancelText: {
+        marginLeft: 16,
+        color: 'blue',
+    },
+    marcas: {
+        marginBottom: 16,
+        paddingHorizontal: 10
+    },
+    sectionTitle: {
+        fontSize: 18,
+        fontWeight: 'bold',
+        marginBottom: 8,
+        paddingHorizontal: 10
+    },
+    prendas: {
+        marginBottom: 16,
+        paddingHorizontal: 10
+    },
+    loading: {
+        alignItems: 'center',
+        marginTop: 16,
+    },
+});
+
+export default Search;

@@ -3,45 +3,47 @@ import { View, Text, Image, StyleSheet } from 'react-native';
 import * as Font from 'expo-font';
 
 export default function Producto({ backgroundImageUrl, precio, titulo, itemWidth, itemHeight }) {
-  const imageHeight = itemHeight === 250 ? '78%' : '85%';
+  const imageHeight = itemHeight === 290 ? '78%' : '85%';
   
   const [fontsLoaded] = Font.useFonts({
     'Roboto': require('../assets/fonts/Roboto-Regular.ttf'),
   });
 
   return (
-    <View style={[styles.producto, { width: itemWidth, height: itemHeight }]}>
-      <View style={[styles.productoImg, {height: imageHeight}]}>
-        <Image source={{ uri: backgroundImageUrl }} style={styles.imagen} />
-        <Text style={styles.precio}>${precio}</Text>
+    <View style={[styles.product, { width: itemWidth, height: itemHeight }]}>
+      <View style={[styles.productImg, {height: imageHeight}]}>
+        <Image source={{ uri: backgroundImageUrl }} style={styles.image} />
+        <Text style={styles.price}>${precio}</Text>
       </View>
-      <Text style={styles.titulo}>{titulo}</Text>
+      <View style={styles.titleContainer}>
+        <Text style={styles.title} ellipsizeMode='tail'>{titulo}</Text>
+      </View>
     </View>
   );
 }
 
 const styles = StyleSheet.create({
-  producto: {
+  product: {
     marginHorizontal: 8,
     marginVertical: 4,
     fontFamily: 'Roboto',
     backgroundColor: '#fff',
     overflow: 'hidden',
     borderRadius: 8,
-    elevation: 3, // Add some shadow for better visibility
+    elevation: 3
   },
-  productoImg: {
+  productImg: {
     width: '100%',
     position: 'relative',
   },
-  imagen: {
+  image: {
     width: '100%',
     height: '100%',
-    resizeMode: 'cover', // Cover ensures the image fully covers the container
+    resizeMode: 'cover',
     borderTopLeftRadius: 8,
     borderTopRightRadius: 8,
   },
-  precio: {
+  price: {
     position: 'absolute',
     bottom: 8,
     left: 8,
@@ -52,11 +54,14 @@ const styles = StyleSheet.create({
     backgroundColor: '#EDE8D0',
     textAlign: 'center'
   },
-  titulo: {
+  title: {
     textAlign: 'center',
     fontSize: 14,
     marginTop: 8,
     paddingHorizontal: 8,
-    color: '#333', // Darker color for better contrast
+    color: '#333'
   },
+  titleContainer: {
+    paddingVertical: 2
+  }
 });

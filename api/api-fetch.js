@@ -12,7 +12,7 @@ export default async function apiCall(endpoint) {
         }
     } catch (e) {
         console.log(e);
-        response = []; // Return an empty array if there's an error
+        response = [];
     }
     return response;
 }

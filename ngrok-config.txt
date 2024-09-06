@@ -1,4 +1,6 @@
 open ngrok
 run server in node on port 3000
+command to set authtoken:
+ngrok config add-authtoken 2kk7gwALemOFxkH3sye9KjcyW3A_3DTgfJ2NYLt6cAcPgoJcx
 paste command to run ngrok tunnel:
 ngrok http --domain=top-perch-rationally.ngrok-free.app 3000

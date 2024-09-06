@@ -16,26 +16,26 @@ export default function Header({ navigation }) {
 
 const styles = StyleSheet.create({
   container: {
-    backgroundColor: 'white',
+    backgroundColor: '#f1f1e8',
     width: '100%',
-    height: 70, // Increased height to provide more space for the title
-    alignItems: 'center', // Center content horizontally
-    justifyContent: 'center', // Center content vertically
-    position: 'relative', // To allow for absolute positioning of the back button
+    height: 70, 
+    alignItems: 'center',
+    justifyContent: 'center',
+    position: 'relative'
   },
   title: {
     fontFamily: 'Montserrat-Bold',
-    fontSize: 28, // Larger font size
+    fontSize: 28,
     fontWeight: 'bold',
     color: 'black',
     marginTop: 14
   },
   backButton: {
     position: 'absolute',
-    left: 10, // Position the back button on the left
+    left: 10
   },
   backText: {
     fontSize: 16,
-    color: 'blue', // You can adjust the color to match your theme
+    color: 'blue'
   },
 });
