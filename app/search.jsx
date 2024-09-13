@@ -39,54 +39,57 @@ const Search = ({ navigation }) => {
     const handleChange = (text) => {
         setQuery(text);
         if (text === '') {
-            // Clear the search results and reset offset when input is empty
             setBusqueda({ prendas: [], marcas: [] });
-            setOffset(0); // Optionally reset offset
+            setOffset(0);
         } else {
-            setOffset(0); // Reset offset for new search query
-            fetchResults(); // Fetch results based on new query
+            setOffset(0);
+            fetchResults();
         }
     };
     
     return (
-        <ScrollView style={styles.container}>
+        <View style={styles.container}>
             <Header />
-            <View style={styles.searchBar}>
-                <TextInput
-                    style={styles.input}
-                    placeholder='Buscar'
-                    onChangeText={handleChange}
-                    value={query}
-                />
-                <Text style={styles.cancelText}>Cancelar</Text>
-            </View>
-
-            <View style={styles.marcas}>
-                <Text style={styles.sectionTitle}>Marcas</Text>
-                {/* Displaying marcas if needed */}
-            </View>
-
-            <View style={styles.prendas}>
-                <Text style={styles.sectionTitle}>Prendas</Text>
-                <ProductList
-                    navigation={navigation}
-                    array={busqueda.prendas}
-                />
-            </View>
-
-            {loading && (
-                <View style={styles.loading}>
-                    <ActivityIndicator size="large" color="#0000ff" />
+            <View style={styles.content}>
+                <View style={styles.searchBar}>
+                    <TextInput
+                        style={styles.input}
+                        placeholder='Buscar'
+                        onChangeText={handleChange}
+                        value={query}
+                    />
+                    <Text style={styles.cancelText}>Cancelar</Text>
                 </View>
-            )}
+
+                <ScrollView contentContainerStyle={styles.scrollContainer}>
+                    <View style={styles.marcas}>
+                        <Text style={styles.sectionTitle}>Marcas</Text>
+                        {/* Displaying marcas if needed */}
+                    </View>
+
+                    <View style={styles.prendas}>
+                        <Text style={styles.sectionTitle}>Prendas</Text>
+                        <ProductList navigation={navigation} array={busqueda.prendas} />
+                    </View>
+
+                    {loading && (
+                        <View style={styles.loading}>
+                            <ActivityIndicator size="large" color="#0000ff" />
+                        </View>
+                    )}
+                </ScrollView>
+            </View>
             <NavBar />
-        </ScrollView>
+        </View>
     );
 };
 
 const styles = StyleSheet.create({
     container: {
-        flex: 1
+        flex: 1,
+    },
+    content: {
+        flex: 1,
     },
     searchBar: {
         flexDirection: 'row',
@@ -120,6 +123,9 @@ const styles = StyleSheet.create({
     prendas: {
         marginBottom: 16,
         paddingHorizontal: 10
+    },
+    scrollContainer: {
+        flexGrow: 1, // Allows the scrollable content to grow and take up available space
     },
     loading: {
         alignItems: 'center',

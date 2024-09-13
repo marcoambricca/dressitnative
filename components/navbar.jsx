@@ -37,13 +37,12 @@ export default function NavBar() {
 
 const styles = StyleSheet.create({
     nav: {
-        display: 'flex',
         backgroundColor: '#000000',
         alignItems: 'center',
         justifyContent: 'center',
         padding: 0,
         width: '100%',
-        position: 'sticky',
+        position: 'absolute', // Changed from 'sticky' to 'absolute'
         bottom: 0,
         zIndex: 1000,
         flexDirection: 'row',
@@ -51,10 +50,8 @@ const styles = StyleSheet.create({
     search: {
         marginHorizontal: 50,
         backgroundColor: '#000000',
-        display: 'flex',
         justifyContent: 'center',
         alignItems: 'center',
-        position: 'relative',
         width: 60,
         height: 60,
         borderWidth: 5,
@@ -63,15 +60,11 @@ const styles = StyleSheet.create({
         marginTop: -65,
     },
     home: {
-        display: 'flex',
-        flexDirection: 'column',
         justifyContent: 'center',
         alignItems: 'center',
         marginVertical: 10,
     },
     profile: {
-        display: 'flex',
-        flexDirection: 'column',
         justifyContent: 'center',
         alignItems: 'center',
         marginVertical: 10,

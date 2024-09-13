@@ -21,7 +21,9 @@ export default function HomeScreen({ navigation }) {
     return (
         <SafeAreaView style={styles.container}>
             <Header />
-            <ProductList navigation={navigation} array={prendas} />
+            <View style={styles.content}>
+                <ProductList navigation={navigation} array={prendas} />
+            </View>
             <NavBar />
         </SafeAreaView>
     );
@@ -30,6 +32,9 @@ export default function HomeScreen({ navigation }) {
 const styles = StyleSheet.create({
     container: {
         flex: 1,
-        backgroundColor: '#f1f1f1'
+        backgroundColor: '#f1f1f1',
+    },
+    content: {
+        flex: 1, // Ensures ProductList scrolls but NavBar stays fixed
     }
 });
