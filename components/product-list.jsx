@@ -50,7 +50,6 @@ export default function ProductList({ navigation, array }) {
 const styles = StyleSheet.create({
     scrollContainer: {
         flexGrow: 1,
-        paddingHorizontal: 5,
     },
     grid: {
         flexDirection: 'row',

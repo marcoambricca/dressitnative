@@ -35,6 +35,7 @@ const styles = StyleSheet.create({
         backgroundColor: '#f1f1f1',
     },
     content: {
-        flex: 1, // Ensures ProductList scrolls but NavBar stays fixed
+        flex: 1,
+        marginRight: 10
     }
 });

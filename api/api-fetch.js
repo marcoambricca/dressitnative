@@ -7,7 +7,8 @@ export default async function apiCall(endpoint) {
     
     try {
         const result = await axios.get(url, { 'headers': { 'ngrok-skip-browser-warning': '1' } }); // Header to disable SSL Auth
-        if (result.data && result.data.length > 0) {
+        if (result.data) {
+            console.log('fetch success')
             response = result.data;
         }
     } catch (e) {

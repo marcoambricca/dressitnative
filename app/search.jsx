@@ -1,5 +1,6 @@
 import React, { useState, useEffect, useCallback } from 'react';
 import { View, Text, TextInput, StyleSheet, ActivityIndicator, ScrollView } from 'react-native';
+import apiCall from '../api/api-fetch.js';
 import ProductList from '../components/product-list.jsx';
 import Header from '../components/header.jsx';
 import NavBar from '../components/navbar.jsx';
@@ -15,8 +16,9 @@ const Search = ({ navigation }) => {
         
         setLoading(true);
         try {
-            const response = await fetch(`http://localhost:3000/api/wear/search/${query}/${offset}/9`);
-            const data = await response.json();
+            const response = await apiCall(`wear/search/${query}/${offset}/12`);
+            const data = response;
+            console.log('search response length', response.prendas.length)
             
             if (data && data.prendas && data.marcas) {
                 setBusqueda(prev => ({
@@ -32,10 +34,6 @@ const Search = ({ navigation }) => {
         }
     }, [query, offset]);
 
-    useEffect(() => {
-        fetchResults();
-    }, [fetchResults]);
-
     const handleChange = (text) => {
         setQuery(text);
         if (text === '') {
@@ -46,6 +44,10 @@ const Search = ({ navigation }) => {
             fetchResults();
         }
     };
+
+    const deleteSearch = () => {
+        setQuery('')
+    }
     
     return (
         <View style={styles.container}>
@@ -58,13 +60,12 @@ const Search = ({ navigation }) => {
                         onChangeText={handleChange}
                         value={query}
                     />
-                    <Text style={styles.cancelText}>Cancelar</Text>
+                    <Text style={styles.cancelText} onPress={deleteSearch}>Cancelar</Text>
                 </View>
 
                 <ScrollView contentContainerStyle={styles.scrollContainer}>
                     <View style={styles.marcas}>
                         <Text style={styles.sectionTitle}>Marcas</Text>
-                        {/* Displaying marcas if needed */}
                     </View>
 
                     <View style={styles.prendas}>
@@ -122,7 +123,7 @@ const styles = StyleSheet.create({
     },
     prendas: {
         marginBottom: 16,
-        paddingHorizontal: 10
+        marginRight: 10
     },
     scrollContainer: {
         flexGrow: 1, // Allows the scrollable content to grow and take up available space
