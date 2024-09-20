@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useCallback } from 'react';
 import { View, Text, TextInput, StyleSheet, ActivityIndicator, ScrollView } from 'react-native';
-import apiCall from '../api/api-fetch.js';
+import apiCall from '../api/api-controller.js';
 import ProductList from '../components/product-list.jsx';
 import Header from '../components/header.jsx';
 import NavBar from '../components/navbar.jsx';

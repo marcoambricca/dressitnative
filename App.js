@@ -5,6 +5,7 @@ import WearDetail from './app/wear/[id].jsx';
 import HomeScreen from './app/home.jsx';
 import SearchScreen from './app/search.jsx';
 import UserProfileScreen from './app/user-profile.jsx';
+import LoginScreen from './app/login.jsx';
 
 const Stack = createStackNavigator();
 
@@ -12,6 +13,10 @@ export default function App() {
   return (
     <NavigationContainer>
       <Stack.Navigator screenOptions={{ headerShown: false }}>
+        <Stack.Screen 
+          name="Login"
+          component={LoginScreen}
+        />
         <Stack.Screen
           name="Home"
           component={HomeScreen}
