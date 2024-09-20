@@ -3,21 +3,17 @@ import { ScrollView, Text, View, TouchableOpacity, StyleSheet, useWindowDimensio
 import Producto from './product-card.jsx';
 
 export default function ProductList({ navigation, array }) {
-    if (array.length === 0) {
-        return (
-            <View style={styles.emptyContainer}>
-                <Text>No products found</Text>
-            </View>
-        );
-    }
-
     const { width } = useWindowDimensions();
     const baseItemWidth = 160;
     const numColumns = Math.floor(width / baseItemWidth);
     const itemWidth = width / numColumns - 16;
     const itemHeight = numColumns > 1 ? 290 : 400;
 
-    return (
+    return array.length === 0 ? (
+        <View style={styles.emptyContainer}>
+            <Text>No products found</Text>
+        </View>
+    ) : (
         <ScrollView contentContainerStyle={styles.scrollContainer}>
             <View style={styles.grid}>
                 {array.map((item, index) => (
@@ -45,11 +41,13 @@ export default function ProductList({ navigation, array }) {
             </View>
         </ScrollView>
     );
+    
 }
 
 const styles = StyleSheet.create({
     scrollContainer: {
         flexGrow: 1,
+        marginBottom: 50
     },
     grid: {
         flexDirection: 'row',

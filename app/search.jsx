@@ -66,6 +66,7 @@ const Search = ({ navigation }) => {
                 <ScrollView contentContainerStyle={styles.scrollContainer}>
                     <View style={styles.marcas}>
                         <Text style={styles.sectionTitle}>Marcas</Text>
+                        {/*busqueda.marcas*/}
                     </View>
 
                     <View style={styles.prendas}>
@@ -113,20 +114,20 @@ const styles = StyleSheet.create({
     },
     marcas: {
         marginBottom: 16,
-        paddingHorizontal: 10
     },
     sectionTitle: {
         fontSize: 18,
         fontWeight: 'bold',
         marginBottom: 8,
-        paddingHorizontal: 10
+        paddingHorizontal: 10,
+        marginLeft: 10
     },
     prendas: {
         marginBottom: 16,
-        marginRight: 10
+        marginRight: 10,
     },
     scrollContainer: {
-        flexGrow: 1, // Allows the scrollable content to grow and take up available space
+        flexGrow: 1,
     },
     loading: {
         alignItems: 'center',

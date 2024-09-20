@@ -10,7 +10,7 @@ export default function HomeScreen({ navigation }) {
 
     useEffect(() => {
         async function fetchWear() {
-            const wear = await apiCall('wear');
+            const wear = await apiCall('wear/random/2');
             if (wear !== undefined) {
                 setPrendas(wear);
             }
@@ -36,6 +36,7 @@ const styles = StyleSheet.create({
     },
     content: {
         flex: 1,
-        marginRight: 10
+        marginRight: 10,
+        marginBottom: 40
     }
 });
